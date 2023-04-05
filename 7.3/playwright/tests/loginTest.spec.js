@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../user');
+const { email, password } = require('../user');
 
 test.beforeEach(async({ page }) => {
     await page.goto("https://netology.ru/?modal=sign_in");
@@ -8,7 +8,6 @@ test.beforeEach(async({ page }) => {
 test("Should successfully login", async({ page }) => {
     const emailInput = page.getByPlaceholder("Email");
     const passwordInput = page.getByPlaceholder("Пароль");
-    const confirmButton = page.getByTestId("login-submit-btn");
 
     await emailInput.fill(email);
     await passwordInput.fill(password);
@@ -20,7 +19,6 @@ test("Should successfully login", async({ page }) => {
 test("Should not login if email is invalid", async({ page }) => {
     const emailInput = page.getByPlaceholder("Email");
     const passwordInput = page.getByPlaceholder("Пароль");
-    const confirmButton = page.getByTestId("login-submit-btn");
 
     await emailInput.fill("12345");
     await passwordInput.fill("12345");
@@ -32,7 +30,6 @@ test("Should not login if email is invalid", async({ page }) => {
 test("Should not login if password is invalid", async({ page }) => {
     const emailInput = page.getByPlaceholder("Email");
     const passwordInput = page.getByPlaceholder("Пароль");
-    const confirmButton = page.getByTestId("login-submit-btn");
 
     await emailInput.fill(email);
     await passwordInput.fill("12345");
